@@ -1,3 +1,14 @@
+import { saudacao, PI } from './exemplo.js'; // ! Importação do tipo ES Modules: import { função1, função2 } do_arquivo './exemplo.ts'
+// import { PI } from './exemplo'; // ! import { função } do_arquivo './exemplo.ts'
+
+// const { saudacao, PI } = require('./exemplo.js'); // ! importação do tipo CommonJS
+
+saudacao();
+console.log(PI);
+
+// ? Obs: A importação dará erro então será necessário alterar o tsconfig.json de "module": "CommonJS"
+// ? para "module": "ES6" na linha 28
+
 const form = document.querySelector('#search-form > form');
 const input: HTMLInputElement | null =
   document.querySelector('#input-localizacao');

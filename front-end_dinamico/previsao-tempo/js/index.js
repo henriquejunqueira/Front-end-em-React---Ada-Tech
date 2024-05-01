@@ -1,4 +1,3 @@
-"use strict";
 var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
@@ -8,6 +7,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+import { saudacao, PI } from './exemplo.js'; // ! Importação do tipo ES Modules: import { função1, função2 } do_arquivo './exemplo.ts'
+// import { PI } from './exemplo'; // ! import { função } do_arquivo './exemplo.ts'
+// const { saudacao, PI } = require('./exemplo.js'); // ! importação do tipo CommonJS
+saudacao();
+console.log(PI);
+// ? Obs: A importação dará erro então será necessário alterar o tsconfig.json de "module": "CommonJS"
+// ? para "module": "ES6" na linha 28
 const form = document.querySelector('#search-form > form');
 const input = document.querySelector('#input-localizacao');
 const sectionTempoInfo = document.querySelector('#tempo-info');
