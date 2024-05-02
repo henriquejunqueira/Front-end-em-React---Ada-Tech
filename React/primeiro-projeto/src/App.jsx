@@ -9,10 +9,12 @@ import article1Img from './assets/img/article01.png';
 import article2Img from './assets/img/article02.jpg';
 import article3Img from './assets/img/article03.jpg';
 import article4Img from './assets/img/article04.jpg';
-import { Counter } from './components/Counter/Counter';
+// import { Counter } from './components/Counter/Counter';
 
 // ? Componente em classe é uma classe que herda a classe Component do React,
 // ? e retorna HTML dentro do método render
+
+// ? Componente funcional é uma função que retorna um HTML
 
 // ? a tag fragment representada por <></> serve pra ser a tag pai dentro do return
 class App extends React.Component {
