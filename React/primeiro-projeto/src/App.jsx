@@ -1,15 +1,15 @@
 import React from 'react';
 
-import { Navbar } from './components/Navbar/Navbar';
-import { Article } from './components/Article/Article';
+// import { Navbar } from './components/Navbar/Navbar';
+// import { Article } from './components/Article/Article';
 
 import './styles/App.css';
 
-import article1Img from './assets/img/article01.png';
-import article2Img from './assets/img/article02.jpg';
-import article3Img from './assets/img/article03.jpg';
-import article4Img from './assets/img/article04.jpg';
-// import { Counter } from './components/Counter/Counter';
+// import article1Img from './assets/img/article01.png';
+// import article2Img from './assets/img/article02.jpg';
+// import article3Img from './assets/img/article03.jpg';
+// import article4Img from './assets/img/article04.jpg';
+import { Counter } from './components/Counter/Counter';
 
 // ? Componente em classe é uma classe que herda a classe Component do React,
 // ? e retorna HTML dentro do método render
@@ -22,11 +22,11 @@ class App extends React.Component {
   render() {
     return (
       <>
-        <Navbar />
+        <Counter />
 
-        {/* <Counter /> */}
+        {/* <Navbar /> */}
 
-        <section id="articles">
+        {/* <section id="articles">
           <Article
             title="Designing Dashboards"
             provider="NASA"
@@ -59,7 +59,7 @@ class App extends React.Component {
             iaculis lectus sollicitudin."
             thumbnail={article4Img}
           />
-        </section>
+        </section> */}
       </>
     );
   }
