@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 
 interface Task {
@@ -7,9 +7,11 @@ interface Task {
   id: number;
 }
 
+// const [state, setState] = useState(initialState) Link Reference: https://react.dev/reference/react/useState
 export const Tasks: React.FC = () => {
   const [taskTitle, setTaskTitle] = useState('');
   const [tasks, setTasks] = useState([] as Task[]);
+  const [counter, setCounter] = useState(0);
 
   // ! Função disparada quando o usuário está querendo adicionar uma nova tarefa
   function handleSubmitAddTask(eventFunction: FormEvent) {
@@ -22,12 +24,25 @@ export const Tasks: React.FC = () => {
     }
 
     // ! Adiciona a tarefa
-    setTasks([
-      ...tasks, // ! pega todas as tarefas que já existiam e coloca nesse novo valor do estado de tarefass
+    const newTasks = [
+      ...tasks, // ! pega todas as tarefas que já existiam e coloca nesse novo valor do estado de tarefas
       { id: new Date().getTime(), title: taskTitle, done: false },
-    ]);
+    ];
+
+    setTasks(newTasks);
+
+    localStorage.setItem('tasks', JSON.stringify(newTasks));
+
     setTaskTitle(''); // ! limpa o input
   }
+
+  useEffect(() => {
+    const tasksOnLocalStorage = localStorage.getItem('tasks');
+
+    if (tasksOnLocalStorage) {
+      setTasks(JSON.parse(tasksOnLocalStorage));
+    }
+  }, []);
 
   return (
     <section className={styles.container}>

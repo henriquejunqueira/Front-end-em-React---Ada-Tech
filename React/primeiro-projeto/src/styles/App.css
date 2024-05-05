@@ -24,3 +24,12 @@ section#articles {
   flex-direction: column;
   gap: 46px;
 }
+
+#carregamentoPagina {
+  height: 400px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

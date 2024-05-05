@@ -1,7 +1,10 @@
-import React from 'react';
-
-// import { Navbar } from './components/Navbar/Navbar';
-// import { Article } from './components/Article/Article';
+import React, { useEffect, useState } from 'react';
+import { Article } from './components/Article/Article';
+import { Navbar } from './components/Navbar/Navbar';
+// import { Audio } from 'react-loader-spinner';
+// import { ProgressBar } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
+import axios from 'axios';
 
 import './styles/App.css';
 
@@ -9,7 +12,7 @@ import './styles/App.css';
 // import article2Img from './assets/img/article02.jpg';
 // import article3Img from './assets/img/article03.jpg';
 // import article4Img from './assets/img/article04.jpg';
-import { Counter } from './components/Counter/Counter';
+// import { Counter } from './components/Counter/Counter';
 
 // ? Componente em classe é uma classe que herda a classe Component do React,
 // ? e retorna HTML dentro do método render
@@ -17,52 +20,80 @@ import { Counter } from './components/Counter/Counter';
 // ? Componente funcional é uma função que retorna um HTML
 
 // ? a tag fragment representada por <></> serve pra ser a tag pai dentro do return
-class App extends React.Component {
+function App() {
+  const [news, setNews] = useState([]);
+
+  useEffect(() => {
+    async function loadNews() {
+      const response = await axios.get(
+        'https://api.spaceflightnewsapi.net/v3/articles'
+      );
+      const newsData = response.data;
+
+      console.log(newsData);
+      setNews(newsData);
+    }
+
+    loadNews();
+  }, []);
+
   // TODO Método responsável por renderizar o conteúdo HTML do componente
-  render() {
-    return (
-      <>
-        <Counter />
+  return (
+    <>
+      {/* <Counter /> */}
 
-        {/* <Navbar /> */}
+      <Navbar />
 
-        {/* <section id="articles">
-          <Article
-            title="Designing Dashboards"
-            provider="NASA"
-            description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed tempor diam 
-            et augue lobortis, ut rhoncus magna lobortis. Etiam quis vehicula lectus. Suspendisse 
-            pulvinar sem ut pulvinar vehicula."
-            thumbnail={article1Img}
-          />
-          <Article
-            img={article2Img}
-            title="Vibrant Portraits of 2020"
-            provider="SpaceNews"
-            description="Phasellus gravida non purus in mollis. Nullam ac aliquam eros. Mauris ante 
-            odio, venenatis eget lacus vel, convallis egestas ante. Sed varius est purus, sagittis 
-            aliquet arcu bibendum ut."
-            thumbnail={article2Img}
-          />
-          <Article
-            title="36 Days of Malayalam type"
-            provider="Spaceflight Now"
-            description="Aliquam elit lorem, porttitor nec volutpat euismod, viverra sed 
-            velit. Pellentesque augue augue, malesuada ac vestibulum eu, suscipit quis ante."
-            thumbnail={article3Img}
-          />
-          <Article
-            title="Designing Dashboards"
-            provider="NASA"
-            description="Ut hendrerit, felis at tincidunt sagittis, quam justo sagittis ante, 
-            ac iaculis est ligula vel lacus. In pellentesque elit fermentum dolor convallis, viverra 
-            iaculis lectus sollicitudin."
-            thumbnail={article4Img}
-          />
-        </section> */}
-      </>
-    );
-  }
+      {/* <Audio
+        height="80"
+        width="80"
+        radius="9"
+        color="green"
+        ariaLabel="loading"
+        wrapperStyle
+        wrapperClass
+      /> */}
+
+      {/* <ProgressBar
+        visible={true}
+        height="80"
+        width="80"
+        color="#4fa94d"
+        ariaLabel="progress-bar-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+      /> */}
+
+      <section id="articles">
+        {news.length === 0 ? (
+          <div id="carregamentoPagina">
+            <ThreeDots
+              visible={true}
+              height="80"
+              width="80"
+              color="#4fa94d"
+              radius="9"
+              ariaLabel="three-dots-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+            />
+          </div>
+        ) : (
+          news.map((article) => {
+            return (
+              <Article
+                key={article.id}
+                title={article.title}
+                provider={article.newsSite}
+                description={article.summary}
+                thumbnail={article.imageUrl}
+              />
+            );
+          })
+        )}
+      </section>
+    </>
+  );
 }
 
 export default App;
