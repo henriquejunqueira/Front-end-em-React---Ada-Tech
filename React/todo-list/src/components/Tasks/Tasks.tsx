@@ -1,17 +1,16 @@
-import { FormEvent, useEffect, useState } from 'react';
-import styles from './styles.module.scss';
+import { FormEvent, useContext, useState } from 'react';
+import { TasksContext } from '../../context/TasksContext';
 
-interface Task {
-  title: string;
-  done: boolean;
-  id: number;
-}
+import styles from './styles.module.scss';
 
 // const [state, setState] = useState(initialState) Link Reference: https://react.dev/reference/react/useState
 export const Tasks: React.FC = () => {
   const [taskTitle, setTaskTitle] = useState('');
-  const [tasks, setTasks] = useState([] as Task[]);
-  const [counter, setCounter] = useState(0);
+  // const [tasks, setTasks] = useState([] as Task[]);
+  // const [counter, setCounter] = useState(0);
+
+  const { tasks, setTasks, handleToggleTaskStatus, handleRemoveTask } =
+    useContext(TasksContext); // Link Reference: https://react.dev/reference/react/useContext
 
   // ! Função disparada quando o usuário está querendo adicionar uma nova tarefa
   function handleSubmitAddTask(eventFunction: FormEvent) {
@@ -36,13 +35,26 @@ export const Tasks: React.FC = () => {
     setTaskTitle(''); // ! limpa o input
   }
 
-  useEffect(() => {
-    const tasksOnLocalStorage = localStorage.getItem('tasks');
+  // function handleToggleTaskStatus(taskId: number) {
+  //   const newTasks = tasks.map((task) => {
+  //     if (taskId === task.id) {
+  //       return {
+  //         ...task,
+  //         done: !task.done,
+  //       };
+  //     }
 
-    if (tasksOnLocalStorage) {
-      setTasks(JSON.parse(tasksOnLocalStorage));
-    }
-  }, []);
+  //     return task;
+  //   });
+
+  //   setTasks(newTasks);
+  // }
+
+  // function handleRemoveTask(taskId: number) {
+  //   const newTasks = tasks.filter((task) => task.id !== taskId);
+
+  //   setTasks(newTasks);
+  // }
 
   return (
     <section className={styles.container}>
@@ -65,8 +77,18 @@ export const Tasks: React.FC = () => {
         {tasks.map((task) => {
           return (
             <li key={task.id}>
-              <input type="checkbox" id={`task-${task.id}`} />
-              <label htmlFor={`task-${task.id}`}>{task.title}</label>
+              <input
+                type="checkbox"
+                id={`task-${task.id}`}
+                onChange={() => handleToggleTaskStatus(task.id)}
+              />
+              <label
+                className={task.done ? styles.done : ''}
+                htmlFor={`task-${task.id}`}
+              >
+                {task.title}
+              </label>
+              <button onClick={() => handleRemoveTask(task.id)}>Remover</button>
             </li>
           );
         })}
