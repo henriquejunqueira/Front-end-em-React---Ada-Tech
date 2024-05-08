@@ -20,3 +20,22 @@ export const Container = styled.aside<ContainerProps>`
 `;
 
 export const Title = styled.h1``;
+
+export const CartProductsList = styled.ul`
+  padding: 2rem 0;
+  list-style: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+export const CartProductItem = styled.li``;
+
+export const Strong = styled.strong``;
+
+export const CartTotal = styled.strong``;
+
+export const ButtonRemoveItemCart = styled.button`
+  margin-left: 5px;
+`;

@@ -24,6 +24,8 @@ export const HeaderTitle = styled.h1`
 export const ButtonsWrapper = styled.div`
   display: flex;
   gap: 1rem;
+
+  margin-right: 280px;
 `;
 
 interface AuthButtonProps {
