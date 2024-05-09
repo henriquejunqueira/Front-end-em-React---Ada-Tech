@@ -12,6 +12,10 @@ export const Header: React.FC = () => {
     (rootReducer: RootReducer) => rootReducer.userReducer
   );
 
+  const { cart } = useSelector(
+    (rootReducer: RootReducer) => rootReducer.cartReducer
+  );
+
   const dispatch = useDispatch();
 
   const [showcart, setShowCart] = useState(false);
@@ -50,7 +54,7 @@ export const Header: React.FC = () => {
         </S.ButtonsWrapper>
       </S.Wrapper>
 
-      <Cart showCart={showcart} />
+      <Cart showCart={showcart} cart={cart} />
     </S.StyledHeader>
   );
 };

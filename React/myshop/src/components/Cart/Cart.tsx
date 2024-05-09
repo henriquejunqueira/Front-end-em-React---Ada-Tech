@@ -1,17 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { RootReducer } from '../../redux/root-reducer';
+import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
+// import { RootReducer } from '../../redux/root-reducer';
 import * as S from './styles';
 import { removeProduct } from '../../redux/Cart/cart-slice';
+import { Product } from '../../data/products';
 
 interface CartProps {
   showCart: boolean;
+  cart: Product[];
 }
 
-export const Cart: React.FC<CartProps> = ({ showCart }) => {
-  const { cart } = useSelector(
-    (rootReducer: RootReducer) => rootReducer.cartReducer
-  );
-
+export const Cart: React.FC<CartProps> = ({ showCart, cart }) => {
   const dispatch = useDispatch();
 
   const total = cart.reduce((totalCart, product) => {
@@ -35,7 +34,7 @@ export const Cart: React.FC<CartProps> = ({ showCart }) => {
         ))}
       </S.CartProductsList>
 
-      <S.CartTotal>Total: ${total.toFixed(2)}</S.CartTotal>
+      <S.CartTotal data-testid="total">Total: ${total.toFixed(2)}</S.CartTotal>
     </S.Container>
   );
 };
