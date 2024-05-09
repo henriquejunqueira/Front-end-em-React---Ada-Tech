@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { Cart } from './Cart';
 import { products } from '../../data/products';
-import { useDispatch, useSelector } from 'react-redux';
+// import { useDispatch, useSelector } from 'react-redux';
 import userEvent from '@testing-library/user-event';
 import { removeProduct } from '../../redux/Cart/cart-slice';
 
