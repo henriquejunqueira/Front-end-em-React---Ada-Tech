@@ -39,7 +39,7 @@ export const Header: React.FC = () => {
   return (
     <S.StyledHeader>
       <S.Wrapper>
-        <S.HeaderTitle>MyShop.</S.HeaderTitle>
+        <S.HeaderTitle>Shopping</S.HeaderTitle>
 
         <S.ButtonsWrapper>
           <S.AuthButton isLogged={isLogged} onClick={handleUserAuth}>
